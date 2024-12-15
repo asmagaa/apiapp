@@ -35,7 +35,7 @@ function App() {
     setInputValue(e.target.value);
   };
 
-  return (
+  return ( // Dlaczego nie dziala??
     <>
       <h1>Pokemon</h1>
       <input
