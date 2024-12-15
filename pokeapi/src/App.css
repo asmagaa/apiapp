@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #333;
+  color: white;
+  font-size: 24px;
+}
+
+@keyframes oscillate {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+img {
+  animation: oscillate 1.5s infinite ease-in-out;
+  width: 200px;
+  height: 200px; 
+}
