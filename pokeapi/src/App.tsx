@@ -1,8 +1,21 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
+
+interface PokemonAbility {
+  ability: {
+    name: string;
+  };
+}
 
 interface PokemonData {
   name: string;
+  sprites: {
+    front_default: string;
+    front_shiny: string;
+  };
+  weight: number;
+  height: number;
+  abilities: PokemonAbility[];
 }
 
 function App() {
@@ -18,6 +31,10 @@ function App() {
       .catch(err => console.error(err));
   }, [pokemon]);
 
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
   return (
     <>
       <h1>Pokemon</h1>
@@ -25,16 +42,21 @@ function App() {
         id="pokemon"
         type='text'
         value={inputValue}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
+        onChange={handleInputChange}
       />
       <button onClick={() => setPokemon(inputValue)}>
-        Search
+        Znajdz pokemona
       </button>
       {pokemonData && (
-        <div>
-          <h2>{pokemonData.name}</h2>
-          {}
-        </div>
+        <>
+          <img src={pokemonData.sprites.front_default} alt="pokemon" />
+          <img src={pokemonData.sprites.front_shiny} alt="pokemon" /> <br />
+          Waga: {pokemonData.weight} <br />
+          Wzrost: {pokemonData.height} <br />
+          {pokemonData.abilities.map(items => (
+            <li key={items.ability.name}>{items.ability.name}</li>
+          ))}
+        </>
       )}
     </>
   );
